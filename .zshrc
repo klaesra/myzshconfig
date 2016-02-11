@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-ZSH=/home/klaes/lib/oh-my-zsh
+ZSH=~/personal/oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -13,6 +13,8 @@ export ZSH
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+alias composer="php composer.phar"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -51,7 +53,7 @@ export ZSH
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(battery extract git git-extras gitfast git-prompt git-remote-branch rvm ruby rbenv python z)
+plugins=(battery bower brew extract git git-extras gitfast git-prompt git-remote-branch npm osx rvm ruby rbenv python z)
 
 # Git auto-completion
 autoload -U compinit && compinit
@@ -59,14 +61,18 @@ autoload -U compinit && compinit
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
-# Add rybygems to path
-PATH="`ruby -e 'puts Gem.user_dir'`/bin:$PATH"
 export PATH=$HOME/bin:$HOME/lib/bin:/usr/local/bin:$PATH
+
+export NVM_DIR=~/.nvm
+source $(brew --prefix nvm)/nvm.sh
+
+# Use node 0.12 as default, switch to 4.0 manually
+nvm use 0.12
 
 # Go lang
 # Add gopath and gopath to path
-export GOPATH="/home/klaes/projects/getqueried/"
-export PATH=$PATH:$GOPATH/bin
+# export GOPATH="/home/klaes/projects/getqueried/"
+# export PATH=$PATH:$GOPATH/bin
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -83,43 +89,14 @@ export PATH=$PATH:$GOPATH/bin
 # ensure we use emacs bindings and not FUCKING VI
 bindkey -e
 
-# Compilation flags
-export ARCHFLAGS="-arch x86_64"
-
 # ssh
 export SSH_KEY_PATH="~/.ssh/dsa_id"
-
-# vlfeat sift
-export PATH=/home/klaes/lib/builds/vlfeat/bin/glnxa64:$PATH
-
-# nltk-data
-NLTK_DATA=$HOME/.nltk_data
-export NLTK_DATA
 
 # TRAMP for emacs
 [[ $TERM == "dumb" ]] && unsetopt zle && PS1='$ '
 
-alias usefulxev="xev | grep -A2 --line-buffered '^KeyRelease' | sed -n '/keycode /s/^.*keycode \([0-9]*\).* (.*, \(.*\)).*$/\1 \2/p'"
-alias startx='startx &> ~/.xlog'
-
-# SSH for language processing
-alias sshlangproc='ssh -p 22022 twb822@136.243.17.71'
-
-# SSH for trustpilot
-alias sshpilot='ssh klaes@zen.cst.sc.ku.dk'
-
-
 function search() {
     yaourt -Ss $1
-}
-
-function igloopicture() {
-    local i
-    for i in "$@"
-    do
-        name=${i:r} ;
-        convert $i -resize 1000x1000 -quality 85 $name.edited.jpg
-    done
 }
 
 function resizeimg() {
@@ -137,3 +114,5 @@ function chpwd() {
     ls
 }
 
+export NVM_DIR=~/.nvm
+  source $(brew --prefix nvm)/nvm.sh
