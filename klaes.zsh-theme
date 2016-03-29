@@ -1,14 +1,14 @@
 #!/usr/bin/env zsh
 # ------------------------------------------------------------------------------
 # Prompt for the Zsh shell:
-#   * One line.
-#   * VCS info on the right prompt.
-#   * Only shows the path on the left prompt by default.
-#   * Crops the path to a defined length and only shows the path relative to
-#     the current VCS repository root.
-#   * Wears a different color wether the last command succeeded/failed.
-#   * Shows user@hostname if connected through SSH.
-#   * Shows if logged in as root or not.
+#	 * One line.
+#	 * VCS info on the right prompt.
+#	 * Only shows the path on the left prompt by default.
+#	 * Crops the path to a defined length and only shows the path relative to
+#		 the current VCS repository root.
+#	 * Wears a different color wether the last command succeeded/failed.
+#	 * Shows user@hostname if connected through SSH.
+#	 * Shows if logged in as root or not.
 # ------------------------------------------------------------------------------
 
 # Customizable parameters.
@@ -30,16 +30,30 @@ autoload -Uz vcs_info
 # Add hook for calling vcs_info before each command.
 add-zsh-hook precmd vcs_info
 
+# Function getting second to last dir level
 function second_to_last_level() {
-  if [ $(git rev-parse --git-dir 2> /dev/null) ]; then
-    cur_repo=$(git rev-parse --show-toplevel | rev | cut -d"/" -f 2 | rev)" "
-  else
-    cur_repo=""
-  fi
+	if [ $(git rev-parse --git-dir 2> /dev/null) ]; then
+		cur_repo=$(git rev-parse --show-toplevel | rev | cut -d"/" -f 2 | rev)" "
+	else
+		cur_repo="%~"
+	fi
 }
 
 # Add hook for calling second_to_last_level before each command.
 add-zsh-hook precmd second_to_last_level
+
+# Function checking for a .nvmrc file
+function nvmrcExists() {
+	if [ -f .nvmrc ]; then
+		if [[ ! (`node -v` == *`cat .nvmrc`*) ]] ; then
+			print -P $FG[128]
+			nvm use
+		fi
+	fi
+}
+
+# Add hook for calling nvmrcExists before each command.
+add-zsh-hook precmd nvmrcExists
 
 # Set vcs_info parameters.
 zstyle ':vcs_info:*' enable hg bzr git

@@ -10,6 +10,9 @@ ZSH_THEME="klaes"
 # Export ZSH or theme choser doesn't work
 export ZSH
 
+export LC_CTYPE=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
@@ -113,6 +116,3 @@ function chpwd() {
     emulate -L zsh
     ls
 }
-
-export NVM_DIR=~/.nvm
-  source $(brew --prefix nvm)/nvm.sh
