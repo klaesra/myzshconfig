@@ -35,7 +35,7 @@ function second_to_last_level() {
 	if [ $(git rev-parse --git-dir 2> /dev/null) ]; then
 		cur_repo=$(git rev-parse --show-toplevel | rev | cut -d"/" -f 2 | rev)" "
 	else
-		cur_repo="%~"
+		cur_repo=""
 	fi
 }
 
@@ -54,6 +54,12 @@ function nvmrcExists() {
 
 # Add hook for calling nvmrcExists before each command.
 add-zsh-hook precmd nvmrcExists
+
+# Add ls call to every cd command
+function chpwd() {
+	emulate -L zsh
+	ls
+}
 
 # Set vcs_info parameters.
 zstyle ':vcs_info:*' enable hg bzr git
