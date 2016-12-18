@@ -75,5 +75,5 @@ zstyle ':vcs_info:*:*' nvcsformats "%~" ""
 
 # Define prompts.
 PROMPT="
-[%*] %{$FX[reset]%}%{$FG[034]%}"'$cur_repo'"%{$PROMPT_VCS_INFO_COLOR%}"'$vcs_info_msg_1_'"%{$FX[reset]%}%{$fg[yellow]%}"'${vcs_info_msg_0_}'"
+[%*] %{$FX[reset]%}%{$FG[034]%}"'$cur_repo'"%{$PROMPT_VCS_INFO_COLOR%}"'$vcs_info_msg_1_'"%{$FX[reset]%}%{$FG[227]%}"'${vcs_info_msg_0_}'"
 %(0?.%{$PROMPT_SUCCESS_COLOR%}.%{$PROMPT_FAILURE_COLOR%})${SSH_TTY:+[%n@%m]}%{$FX[bold]%}%(!.$PROMPT_ROOT_END.$PROMPT_DEFAULT_END)%{$FX[no-bold]%}%{$FX[reset]%} "
