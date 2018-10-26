@@ -13,8 +13,8 @@
 
 # Customizable parameters.
 PROMPT_PATH_MAX_LENGTH=30
-PROMPT_DEFAULT_END=%3{'☠ ❯'%}
-PROMPT_ROOT_END=❯❯❯
+PROMPT_DEFAULT_END=%3{'🔥 ❯'%}
+PROMPT_ROOT_END=%5{'☠ ☢ ❯'%}
 PROMPT_SUCCESS_COLOR=$FG[071]
 PROMPT_FAILURE_COLOR=$FG[124]
 PROMPT_VCS_INFO_COLOR=$FG[242]
@@ -35,7 +35,7 @@ function second_to_last_level() {
 	if [ $(git rev-parse --git-dir 2> /dev/null) ]; then
 		cur_repo=$(git rev-parse --show-toplevel | rev | cut -d"/" -f 2 | rev)" "
 	else
-		cur_repo=""
+		cur_repo="%~"
 	fi
 }
 
@@ -63,15 +63,14 @@ function chpwd() {
 
 # Set vcs_info parameters.
 zstyle ':vcs_info:*' enable hg bzr git
-zstyle ':vcs_info:*:*' check-for-changes true # Can be slow on big repos.
-zstyle ':vcs_info:*:*' unstagedstr '!'
-zstyle ':vcs_info:*:*' stagedstr '+'
-zstyle ':vcs_info:*:*' actionformats "%S" "%r (%a)"
-zstyle ':vcs_info:*:*' formats "%S" "%r "
-zstyle ':vcs_info:*:*' nvcsformats "%~" ""
+zstyle ':vcs_info:*' check-for-changes true # Can be slow on big repos.
+zstyle ':vcs_info:*' unstagedstr '!'
+zstyle ':vcs_info:*' stagedstr '+'
+zstyle ':vcs_info:*' actionformats "%S" "%r (%a)"
+zstyle ':vcs_info:*' formats "%S" "%r "
 
-# zstyle ':vcs_info:*:*' actionformats "%S" "%r/%s/%b (%a) "
-# zstyle ':vcs_info:*:*' formats "%S" "%r/%s/%b "
+# zstyle ':vcs_info:*' actionformats "%S" "%r/%s/%b (%a) "
+# zstyle ':vcs_info:*' formats "%S" "%r/%s/%b "
 
 # Define prompts.
 PROMPT="
