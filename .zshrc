@@ -51,7 +51,7 @@ alias composer="php composer.phar"
 # HIST_STAMPS="mm/dd/yyyy"
 
 # Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
+ZSH_CUSTOM=~/personal/configs/myzshconfig
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
@@ -63,14 +63,23 @@ autoload -U compinit && compinit
 
 source $ZSH/oh-my-zsh.sh
 
+# Load autosuggestions
+source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+
 # User configuration
-export PATH=$HOME/bin:$HOME/lib/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:$HOME/lib/bin:/usr/local/bin:/usr/local/sbin:$PATH
 
 export NVM_DIR=~/.nvm
 source $(brew --prefix nvm)/nvm.sh
 
 # Use node 0.12 as default, switch to 4.0 manually
-nvm use 0.12
+nvm use 8.12
+
+# Set Java env-var
+export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
+
+# Set Android env-var
+export ANDROID_HOME=/usr/local/share/android-sdk
 
 # Go lang
 # Add gopath and gopath to path
@@ -93,14 +102,11 @@ nvm use 0.12
 bindkey -e
 
 # ssh
-export SSH_KEY_PATH="~/.ssh/dsa_id"
+export SSH_KEY_PATH="~/.ssh/id_rsa"
 
 # TRAMP for emacs
 [[ $TERM == "dumb" ]] && unsetopt zle && PS1='$ '
 
-function search() {
-    yaourt -Ss $1
-}
 
 function resizeimg() {
     local i
@@ -116,3 +122,9 @@ function chpwd() {
     emulate -L zsh
     ls
 }
+
+###-tns-completion-start-###
+if [ -f /Users/klaes.rasmussen/.tnsrc ]; then 
+    source /Users/klaes.rasmussen/.tnsrc 
+fi
+###-tns-completion-end-###
