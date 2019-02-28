@@ -72,6 +72,9 @@ export PATH=$HOME/bin:$HOME/lib/bin:/usr/local/bin:/usr/local/sbin:$PATH
 export NVM_DIR=~/.nvm
 source $(brew --prefix nvm)/nvm.sh
 
+# Add latex path to path
+export PATH=/Library/TeX/texbin:$PATH
+
 # Use node 0.12 as default, switch to 4.0 manually
 nvm use 8.12
 
